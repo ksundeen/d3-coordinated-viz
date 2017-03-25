@@ -1,0 +1,54 @@
+﻿fipscode,State,AveRetailPrice_CentsPerKwh,NetSummerCapacity_MW,NetGeneration_mwh,TotalRetailSales_mwh,NumElectricCo,ElectricCompanies,Area_sqmi,SqmiPerUtility
+1,Alabama,9.33,"30,407","152,477,427","88,845,543",3,"Alabama Power, PowerSouth Energy Cooperative, Inc., Wiregrass Electric Cooperative",52420,17473.33
+2,Alaska,17.59,"2,589","6,284,937","6,159,204",5,"Golden Valley Electric Association, Chugach Electric Association, Copper Valley Electric Association, Municipal Light & Power, Kodlak Electric Association",665384,133076.80
+4,Arizona,10.34,"28,077","113,142,048","77,349,416",3,"Arizona Public Service (APS), Salt River Project, 
+Tuscon Electric Power
+",113990,37996.67
+5,Arkansas,8.19,"14,707","55,559,428","46,465,154",1,Entergy,53178,53178.00
+6,California,15.42,"74,892","196,703,858","261,170,437",19,"Azusa Light & Water, East Bay Municipal Utility District, Glendale Public Service Department, Gridley Municipal Utilities, Healdsburg Municipal Electric Department, Los Angeles Department of Water and Power, Nevada Irrigation District, Pacific Gas & Electric (PGE), Pacific Power, Riverside Public Utilities, Sacramento Municipal Utility District, Santa Clara Electric Department, San Diego Gas & Electric (SDG&E) , Sierra-Pacific Power, Southern California Edison, Southern California Public Power Authority, Pasadena Water & Power, Burbank Water & Power, Anaheim Public Utilities",163695,8615.53
+8,Colorado,9.94,"15,793","52,393,077","54,116,046",1,Xcel Energy,104094,104094.00
+9,Connecticut,17.77,"8,784","37,470,622","29,476,155",2,"Northeast Utilities, United Illuminating",5543,2771.50
+10,Delaware,11.17,"3,403","7,810,006","11,498,205",2,"Delaware Power & Light, (Subsidiary of Pepco Holdings)",2489,1244.50
+11,District of Columbia,12.07,21,"53,750","11,291,233",1,PEPCO,68.34,68.34
+12,Florida,10.49,"58,636","237,412,633","235,599,398",11,"Florida Power & Light, TECO, Progress Energy Florida, Lake Worth Utilities, Guld Power Co., Kissimmee Utility Authoriy, Ocala Elecric, Florida Public Utility Company, Palm Peach, Florida Municipal Power Agency, LCEC",65758,5978.00
+13,Georgia,9.62,"36,303","128,817,898","135,878,215",2,"Georgia Power (part of Southern Company), Flint Energy",59425,29712.50
+15,Hawaii,26.17,"2,674","10,119,500","9,511,352",1,Hawaiian Electric Industries (HECO),10932,10932.00
+16,Idaho,8.09,"4,948","15,667,095","23,058,814",3,"IDACORP, Clearwater Power, PacifiCorp (Rocky Mountain Power)",83569,27856.33
+17,Illinois,9.4,"45,532","193,952,040","138,619,970",4,"Ameren, City Water, Light & Power, ComEd",57913,14478.25
+18,Indiana,8.99,"26,324","104,019,275","104,514,518",5,"Duke Energy, Cinergy Corporation, Indianapolis Power & Light, Northern Indiana Public Service Company, American Electric Power",36420,7284.00
+19,Iowa,8.35,"16,854","56,658,918","47,147,293",2,"MidAmerican Energy, Alliant Energy",56272,28136.00
+20,Kansas,10.14,"14,350","45,527,124","39,849,127",3,"Kansas City Power & Light, Westar Energy, Kansas City Board of Public Utilities",82278,27426.00
+21,Kentucky,8.14,"20,061","83,543,671","76,038,630",5,"Kentucky Utilities, Louisville Gas & Electric, Cinergy Corporation, American Electric Power, Owensboro Municipal Utilities",40408,8081.60
+22,Louisiana,7.65,"26,235","107,812,354","91,676,489",3,"SWEPCO, Entergy, CLECO",52378,17459.33
+23,Maine,12.78,"4,615","11,741,265","11,888,168",2,"Central Maine Power, Bangor Hydro Electric",35380,17690.00
+24,Maryland,12.07,"12,408","36,365,544","61,781,719",6,"Baltimore Gas & Electric, PEPCO, SOuthern Maryland Electric Cooperative, Allegheny Power, Conectiv (Pepco Holdings, Inc.), Choptank",12406,2067.67
+25,Massachusetts,16.9,"13,236","32,085,969","54,621,088",6,"NSTAR, Northeast Utilities, National Grid, Massachusetts Electric, Berkshire Company (WMECO), Nantucket Electric",10554,1759.00
+26,Michigan,10.76,"30,063","113,008,050","102,479,921",7,"Consumers Energy, DTE Energy (Detroit Edison), We Energies, American Electric Power, Wyandotte Municipal Services, Holland Board of Public Works, Lansing Board of Water & Light",96713,13816.14
+27,Minnesota,9.53,"15,743","56,979,768","66,579,234",19,"Xcel Energy, Great River Energy, Minnkota Power Cooperative, Basin Electric Power Cooperative, Dairyland Power Coop, East River Electric Power Co-op, Hutchinson Utilities Commission, Interstate Power and Light Company, L&O Power Co-op, Marshall Municipal Utilities, Minnesota Power, Minnetonka Power Co-op, Missouri River Energy, Otter Tail Power Company, Rochester Public Utilities Commission, Southern Minnesota Municipal Power Agency, Willmar Municipal Utilities, Freeborn-Mower Co-op Services, People's Co-op Tri-County Electric",86936,4575.58
+28,Mississippi,9.53,"16,085","64,757,864","48,691,529",5,"Entergy, Southwest Mississippi Electric Power Association, Magnolia Electric, Mississippi Power Company, Southern Company",48432,9686.40
+29,Missouri,9.44,"21,764","83,640,067","81,504,081",6,"Ameren, Kansas City Power & Light, Empire District Electric, Aquila, City Utilities of Springfield, Independence Power and Light",69707,11617.83
+30,Montana,8.9,"6,180","29,302,401","14,206,911",4,"Northwestern Energy, Montana-Dakota Utilities, Central Montana Electric Power Cooperative, Montana Electric Cooperatives' Association",147040,36760.00
+31,Nebraska,8.91,"8,658","39,883,391","29,495,073",2,"Omaha Public Power District, Nebraska Public Power District",77348,38674.00
+32,Nevada,9.48,"10,878","39,046,784","36,019,690",2,"Nevada Power, Sierra Pacific Power",110572,55286.00
+33,New Hampshire,16.02,"4,438","20,015,893","10,999,149",2,"Northeast Utilities, National Grid",9349,4674.50
+34,New Jersey,13.74,"18,767","74,608,860","75,489,623",7,"Atlantic City Electric, Public Service Electric and Gas Company, Northeast Utilities, First Energy, Jersey Central Power and Light Company, Vineland Municipal Electric Utility, Sussex Rural Electric Cooperative",8722,1246.00
+35,New Mexico,9.62,"8,404","32,701,398","23,093,553",1,Public Service Company of New Mexico,121590,121590.00
+36,New York,15.28,"40,249","138,627,721","148,913,655",8,"CH Energy Group, Central Hudson Gas & Electric , Consolidated Edison Company of New York, Long Island Power Authority, Northeast Utilities, National Grid, New York State Electric & Gas, Rochester Gas & Electric",54555,6819.38
+37,North Carolina,9.37,"31,310","128,388,445","133,847,523",3,"Dominion North Carolina Power, Duke Energy Carolinas, Progress Energy Carolinas, Inc.",53819,17939.67
+38,North Dakota,8.75,"7,362","37,156,612","18,128,948",7,"Xcel Energy, Otter Tail Power Company, Montana Dakota Utilities, Central Power Electric Cooperative, Miinkota Power Cooperative, Basin Electric Power Cooperative, Upper Missouri G&T Cooperative",70698,10099.71
+39,Ohio,9.98,"28,711","121,893,401","149,213,224",9,"Cinergy Corporation, First Energy, Cleveland Electric Illuminating Company, Ohio Edison, Toledo Edison , American Electric Power, Dayton Power & Light, South Central Power Company, Consolidated Electric Cooperative",44825,4980.56
+40,Oklahoma,7.9,"24,835","76,135,596","61,336,385",2,"Oklahoma Gas & Electric, Public Service Company of Oklahoma (Part of American Electric Power)",69899,34949.50
+41,Oregon,8.75,"15,916","57,866,535","47,263,974",5,"Columbia River Public Utility District, Eugene Water and Electric Board, PacifiCorp (Pacific Power), Portland General Electric, West Oregon Electric Cooperative",98379,19675.80
+42,Pennsylvania,10.31,"42,344","214,572,291","146,344,028",6,"Northeast Utilities, Rural Valley Electric Co., First Energy, PECO, Allegheny Power, PPL",46054,7675.67
+44,Rhode Island,17.01,"1,849","6,939,019","7,664,718",2,"Northeast Utilities, National Grid",1544,772.00
+45,South Carolina,9.58,"22,698","96,532,213","81,328,246",5,"Santee Cooper, Duke Energy, Central Electric Power Cooperative, Inc., Progress Energy Carolinas, South Carolina Electric & Gas Company",32020,6404.00
+46,South Dakota,9.47,"4,126","9,633,033","12,101,979",7,"Xcel Energy, Otter Tail Power Company, Montana-Dakota Utilities, Northwestern Enerrgy, Black Hills Power, East River Electric Cooperative, Rushmore Eletric Cooperative",77116,11016.57
+47,Tennessee,9.3,"20,220","75,214,636","99,632,108",8,"Citizens Utilities Board, Electric Power Board, Knoxville Utilities Board, Kingsport Power (Appalachian Power), Lenoir City Utilities Board, Memphis Light, Gas and Water, Nashville Electric Service, Tennessee Valley Authority",42144,5268.00
+48,Texas,8.7,"117,144","449,826,336","392,337,354",15,"Austin Energy, CPS Energy, dPi Energy, Electric Database Publishing, Garland Power and Light, Luminant, Reliant Energy, CenterPoint Energy, Texas Electric Service Company, American Electric Power, Lower Colorado River Authority, Oncor Electric (Formerly TXU), Cosery Electric, Denton Municipal Electric, Entergy",268596,17906.40
+49,Utah,8.54,"8,329","41,949,120","30,192,350",2,"Intermountain Power Agency, PacifiCorp (Rocky Mountain Power)",84897,42448.50
+50,Vermont,14.41,655,"1,982,047","5,521,109",2,"Central Vermont Public Service, Green Mountain Power",9616,4808.00
+51,Virginia,9.31,"25,182","84,411,592","112,009,045",6,"Dominion Virginia Power, Rapahannock Electric Cooperative, Allegheny Power (subsidiary of Pepco Holdings, Inc.), Conectiv, Appalachian Power, Virginia Power and Electric Company (VEPCO)",42775,7129.17
+53,Washington,7.4,"31,003","109,287,458","90,116,086",7,"PacifiCorp (Pacific Power), Puget Sound Energy, Seattle City Light, Snohomish County Public Utility District (PUD), Mason County Public Utility District 3, Klickitat Public Utility District, Avista Utilities",71298,10185.43
+54,West Virginia,8.11,"15,115","72,295,269","32,303,026",3,"Allegheny Power, Appalachian Power, Wheeling Electric Power (AEP Ohio)",24230,8076.67
+55,Wisconsin,10.73,"16,669","66,360,183","68,698,932",4,"We Energies, Wisconsin Public Service Corporation, Xcel Energy, Wisconsin Power & Light",65496,16374.00
+56,Wyoming,7.97,"8,512","48,966,519","16,924,762",2,"PacifiCorp (Rocky Mountain Power), Lower Valley Energy",97813,48906.50
