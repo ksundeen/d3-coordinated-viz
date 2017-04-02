@@ -186,15 +186,13 @@ to set break points, use debugger; where you want a breakpoint
     };    
     
     function setChart(csvData, colorScale) {
-        // chart dimensions with responsive width & height
+        /*// chart dimensions
+        var chartWidth = 550,
+            charHeight = 460;
+        */
+        // replace original chart dimensions with responsive width & height
         var chartWidth = window.innerWidth * 0.41,
-            chartHeight = pageHeight,
-            leftPadding = 25,
-            rightPadding = 2,
-            topBottomPadding = 5,
-            chartInnerWidth = chartWidth - leftPadding - rightPadding,
-            chartInnerHeight = chartHeight - topBottomPadding * 2,
-            translate = "translate(" + leftPadding + "," + topBottomPadding + ")";
+            chartHeight = pageHeight
         
         // svg element to hold bar chart
         var chart = d3.select("body")
@@ -203,17 +201,10 @@ to set break points, use debugger; where you want a breakpoint
             .attr("height", chartHeight)
             .attr("class", "chart");
         
-        // create background rectangle for chart fill
-        var chartBackground = d3.select("rect")
-            .attr("class", "chartBackground")
-            .attr("width", chartInnerWidth)
-            .attr("height", chartInnerHeight)
-            .attr("transform", translate);
-        
         // scale to size bars proportional to window frame
         var yScale = d3.scaleLinear()
-            .range([chartHeight-10, 0])    // all possible OUTPUT PIXELS
-            .domain([0, 27]); // all possible INPUT VALUES
+            .range([0, chartHeight])
+            .domain([0, 27]);
         
         // set chart bars for each state. Sets widge of the (page width)/# data records
         var bars = chart.selectAll(".bars")
@@ -230,44 +221,94 @@ to set break points, use debugger; where you want a breakpoint
             })
             .attr("width", chartWidth / csvData.length - 1) 
             .attr("x", function(d, i) {
-                return i * (chartWidth / csvData.length) + leftPadding;
+                return i * (chartWidth / csvData.length);
             })
-// MAY NEED TO DEBUG THIS...BASED ON THOMAS' COMMENT        
             .attr("height", function(d){
-                return (chartHeight-10) -  yScale(parseFloat(d[expressedAttr]));
+                return yScale(parseFloat(d[expressedAttr]));
             })
             .attr("y", function(d) {
-                return yScale(parseFloat(d[expressedAttr])) + topBottomPadding;
+                return chartHeight - yScale(parseFloat(d[expressedAttr]));
             })
             .style("fill", function(d) {
                 return getChoroplethColor(d, colorScale);
             });
         
-
+        // Appending text of data value to each bar & sorting just like the bar chart
+        var numbers = chart.selectAll(".numbers")
+            .data(csvData)
+            .enter()
+            .append("text")
+            .sort(function(a, b) {
+                return b[expressedAttr] - a[expressedAttr];
+            })
+            .attr("class", function(d){
+                return "numbers " + d.fipscode;
+            })
+            .attr("text-anchor", "middle") // center-justifies text
+            
+            // placing the x of svg graphic at a fraction of the (window width/# data rows); then returns of 1/2 of bar's width to ...
+            //x attribute adds half of the bar's width to the formula for the horizontal coordinate used in the bars block so that each number is centered in the bar
+        
+            // WHY SUCH A COMPLICATED FRACTION???
+            .attr("x", function(d, i) {
+                var fraction = chartWidth / csvData.length;
+                console.log(i * fraction + (fraction -1) / 2);
+                return i * fraction + (fraction -1) / 2;
+            })
+            // y attribute accesses  yScale using  same formula as in the bars block, but adds 15 pixels to lower text to appear inside of, rather than on top of, each bar
+            .attr("y", function(d) {
+                return chartHeight - yScale(parseFloat(d[expressedAttr])) + 15;
+            })
+            .text(function(d){
+                return d[expressedAttr];
+            });
+        
         // Bar title
         var chartTitle = chart.append("text")
-            .attr("x", 40)  // append 40 pixels to the right
+            .attr("x", 20)  // append 20 pixels to the right
             .attr("y", 40)  // append 40 pixels down
             .attr("class", "chartTitle")
             .text(expressedAttr + " in each state");
-        
-        // Vertical axis generator
-        var yAxis = d3.axisLeft()
-            .scale(yScale)
-//            .orient("left");
-        
-        // place axis; the svg "g" group attribute
-        var axis = chart.append("g")
-            .attr("class", "axis")
-            .attr("transform", translate)
-            .call(yAxis);
 
-        // frame for chart border
-        var chartFrame = chart.append("rect")
-            .attr("class", "chartFrame")
-            .attr("width", chartInnerWidth)
-            .attr("height", chartInnerHeight)
-            .attr("transform", translate)
+            
+//        console.log(bars);
     };
+    
+    /*    
+    // Creates color scale based on attribute values in a csv file using Quantile scale
+    function makeColorScale(data) {
+        var colorClasses = [
+            "#D4B9DA",
+            "#C994C7",
+            "#DF65B0",
+            "#DD1C77",
+            "#980043"            
+        ];
+        
+        // d3's color generator
+        var colorScale = d3.scaleQuantile()
+            .range(colorClasses);
+        
+        // Set min/max values for scalebare
+        var minmax = [
+            d3.min(data, function(d) { return parsefloat(d[expressedAttr]); }),
+            d3.max(data, function(d) { return parsefloat(d[expressedAttr]); })
+        ];
+        colorScale.domain(minmax);
+        return colorScale;
+        
+//        // Builds array of all values from "expressedAttr" global array
+//        // USE THIS TO CREATE SEPARATE RANGES FOR EACH VARIABLE
+//        var domainArray = [];
+//        for (var i=0; i<data.length; i++) {
+//            var val = parseFloat(data[i][expressedAttr]);
+//            domainArray.push(domainArray);
+//        };
+//        
+//        // Assign all values as scale domain 
+//        colorScale.domain(domainArray);
+          
+    };
+*/
     
 })();

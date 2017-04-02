@@ -5,9 +5,9 @@ html * {
 }
 
 .states {
-    fill: #808080;
-    stroke: #CCC;
-    stroke-width: 2px;
+    stroke: #000;
+    stroke-width: 0.5px;
+    stroke-linecap: round;
 }
 
 .gratLines {
@@ -17,9 +17,52 @@ html * {
 }
 
 .gratBackground {
-    fill: #d5e3ff;
+/*    fill: #d5e3ff;*/
+    fill: #F0F8FF;
 }
 
 .map {
     border: medium solid #999;
+    margin: 10px 0 0 20px;
+}
+
+.chartBackground {
+    background-color: rgba(128,128,128,0.2);
+}
+.chart {
+
+/*    border: medium solid #999;*/
+    float: right;
+    margin: 7px 20px 0 0;
+}
+
+.chartFrame {
+    fill: none;
+    stroke: #999;
+    stroke-width: 3px;
+    shape-rendering: crispEdges;    
+}
+/* Use when adding number text to the bars
+.numbers {
+    fill: white;
+    font-size: 10px;
+}
+*/
+
+.chartTitle {
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #999;
+    stroke-width: 1px;
+    shape-rendering: crispEdges;
+}
+
+.axis text {
+    font-size: 0.8em;
+    fill: #999;
 }
