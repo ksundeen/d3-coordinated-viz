@@ -50,6 +50,7 @@ to set break points, use debugger; where you want a breakpoint
         var width = window.innerWidth * 0.5,
             height = pageHeight-10;
 
+        ///// Zoom behavior found here: https://coderwall.com/p/psogia/simplest-way-to-add-zoom-pan-on-d3-js
         // define zoom behavior
         var zoom = d3.zoom()
             .scaleExtent([0.2, 10])
