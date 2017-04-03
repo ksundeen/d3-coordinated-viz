@@ -7,14 +7,14 @@ to set break points, use debugger; where you want a breakpoint
 (function() {
  
     // Pseudo-global variables (global within this file, but local for all other js libraries referenced)
-    var attrArray = ["AveRetailPrice_CentsPerKWH", "SqmiPerUtility_PerSqMi", 
-                     "NetSummerCapacity_MW_per100SqMi", "NetGeneration_MW_per_SqMi", "TotalRetailSales_inMWH_perSqMi", "NumElectricCo"];
-    
-    var companyNames =  "ElectricCompanyNames"
-    
+    var attrArray = ["AveRetailPrice_CentsPerKWH", "NumElectricCo", "NetSummerCapacity_MW_per_100SqMi", "NetGeneration_100MW_per_100SqMi", "TotalRetailSales_per100MWH_per100SqMi", "SqmiPerUtility_Per100SqMi"];
     
     var pageHeight = 460;
     
+/* all attributes in csv file, but these will have drastically different values, so I removed only those I want to show    
+    var attrArray = ["AveRetailPrice_CentsPerKWH", "NetSummerCapacity_MW", "NetGeneration_MWH", "TotalRetailSales_MWH", 
+                     "NumElectricCo", "NetSummerCapacity_MW_per_SqMi", "NetGeneration_MW_per_SqMi", "TotalRetailSales_per_SqMi"];
+*/  
     var expressedAttr = attrArray[0]; // initial attribute for array
 
     // chart dimensions with responsive width & height
@@ -29,7 +29,7 @@ to set break points, use debugger; where you want a breakpoint
 
     // scale to size bars proportional to window frame
     var yScale = d3.scaleLinear()
-        .range([chartHeight-7, 0])    // all possible OUTPUT PIXELS
+        .range([chartHeight-10, 0])    // all possible OUTPUT PIXELS
         .domain([0, 27]); // all possible INPUT VALUES      
 
     // Execute script when window opens
@@ -39,7 +39,7 @@ to set break points, use debugger; where you want a breakpoint
     function setMap() {
         // var width = 850, height = 460;  // Replaced original map dimensions with using HTML innerWidth attribute
         var width = window.innerWidth * 0.5,
-            height = pageHeight-10;
+            height = pageHeight;
 
         // Create svg graphic as map container; setting width & height within svg graphic as attributes
         var map = d3.select("body")
@@ -58,7 +58,7 @@ to set break points, use debugger; where you want a breakpoint
 
         d3.queue()
             .defer(d3.csv, "data/StateEnergyProfiles.csv")      // csv with attributes
-            .defer(d3.json, "data/ne_50m_us_states_abbrev.topojson")   // topojson of states
+            .defer(d3.json, "data/ne_50m_us_states.topojson")   // topojson of states
             .await(callback);
 
         // function to load data & report errors during loading
@@ -68,12 +68,12 @@ to set break points, use debugger; where you want a breakpoint
             setGraticule(map, path);
 
             // Translating topojson to geojson
-            var stateBoundaries = topojson.feature(states, states.objects.ne_50m_us_states_abbrev).features;
+            var stateBoundaries = topojson.feature(states, states.objects.ne_50m_us_states).features;
 
             // Add state geojson to map
             var states = map.append("path")
                 .datum(stateBoundaries)
-                .attr("class", "state")
+                .attr("class", "countries")
                 .attr("d", path);
 
             // Join csv data to geojson states (as enumeration units)
@@ -115,11 +115,12 @@ to set break points, use debugger; where you want a breakpoint
         // Looping through array to join to geojson state
         for (var i=0; i < csvData.length; i++) {
             var csvStates = csvData[i];  // current region's data for variable i
-            var csvKey = csvStates.abbrev; // csv's primary key to join to geojson file
+            var csvKey = csvStates.fipscode; // csv's primary key to join to geojson file
+            //console.log(stateBoundaries);
             // then for each csv value, loop through geojson states to find matching state
             for (var a = 0; a < stateBoundaries.length; a++) {
                 var geojsonProperties = stateBoundaries[a].properties;  // getting geojson stateBoundaries properties
-                var geojsonKey = geojsonProperties.abbrev;            // matching geojson key
+                var geojsonKey = geojsonProperties.fipscode;            // matching geojson key
 
                 // if geojsonKey matches csvKey, set csv properties to geojson object (temp. join)
                 if (geojsonKey == csvKey) {
@@ -135,34 +136,22 @@ to set break points, use debugger; where you want a breakpoint
     };
     
     function setEnumerationUnits(stateBoundaries, map, path, colorScale) {
-        // Can reference topojson files of states with attributes "name" or "abbrev"
+        // Can reference topojson files of states with attributes "name" or "fipscode"
         var states = map.selectAll(".states")
             .data(stateBoundaries)
             .enter()
             .append("path")
             .attr("class", function(d) {
-                return "states " + d.properties.abbrev;   // used for highlight
+                  return "states " + d.properties.fipscode;
                   })
             .attr("d", path) // path variable is the svg path
             .style("fill", function(d) {
                 return getChoroplethColor(d.properties, colorScale);
             })
-            // need to pass the anonymous function to access only the d properties; otherwise, we'd be getting all the data
-            .on("mouseover", function(d) {
-                highlight(d.properties);
-            })
-            .on("mouseout", function(d) {
-                dehighlight(d.properties);               
-            })
-            .on("mousemove", moveLabel);
-        
-        // Add desc element for each path element in states object to change stroke
-        var desc = states.append("desc")
-            .text('{"stroke": "#000", "stroke-width": "0.5"}');
 
         //console.log(error);
         //console.log(csvData);
-//        console.log(stateBoundaries);
+        console.log(stateBoundaries);
     };
     
     function getChoroplethColor(featureProperties, colorScale){
@@ -178,32 +167,13 @@ to set break points, use debugger; where you want a breakpoint
     
     // Jenks Methods to create color scale based on attribute values in a csv file
     function makeColorScale(data) {
-        // pinks
-//        var colorClasses = [
-//            "#feebe2",
-//            "#fbb4b9",
-//            "#f768a1",
-//            "#c51b8a",
-//            "#7a0177"  
-//        ];   
-            
-        // lighter greens
         var colorClasses = [
-            "#ffffcc",
-            "#c2e699",
-            "#78c679",
+            "#edf8e9",
+            "#bae4b3",
+            "#74c476",
             "#31a354",
-            "#006837"
+            "#006d2c"
         ];
-        
-//        // darker greens
-//        var colorClasses = [
-//            "#d9f0a3",
-//            "#addd8e",
-//            "#78c679",
-//            "#31a354",
-//            "#006837"
-//        ];
         
         // d3's color generator
         var colorScale = d3.scaleThreshold()
@@ -259,21 +229,13 @@ to set break points, use debugger; where you want a breakpoint
                 return b[expressedAttr] - a[expressedAttr];
             })
             .attr("class", function(d){
-                return "bar " + d.abbrev;   // used for highlight function
+                return "bar " + d.fipscode;
             })
-            .attr("width", chartInnerHeight / csvData.length - 1)
-            // only need to use "highlight" function without entire data properties since we already have the "d.abbrev" being returned
-            .on("mouseover", highlight)
-            .on("mouseout", dehighlight)
-            .on("mousemove", moveLabel);
-        
-        // Add style descriptor to each rectangle
-        var desc = bars.append("desc")
-            .text('{"stroke": "none", "stroke-width": "0px"}');
+            .attr("width", chartWidth / csvData.length - 1); 
 
         // Bar title
         var chartTitle = chart.append("text")
-            .attr("x", 40)  // append 40 pixels to the right
+            .attr("x", 50)  // append 40 pixels to the right
             .attr("y", 40)  // append 40 pixels down
             .attr("class", "chartTitle")
             .text("State " + expressedAttr);
@@ -335,8 +297,6 @@ to set break points, use debugger; where you want a breakpoint
         
         // recolor enumeration units
         var newStates = d3.selectAll(".states")
-            .transition()
-            .duration(1000)
             .style("fill", function(d) {
                 return getChoroplethColor(d.properties, newColorScale)
             });  
@@ -348,22 +308,16 @@ to set break points, use debugger; where you want a breakpoint
         
         // reset yScale to new range of data users selected
         yScale = d3.scaleLinear()
-            .range([chartHeight-7, 0])
+            .range([chartHeight-10, 0])
             .domain([0, dataMax]);     
-//        console.log("yScale Updated dataMax: ", dataMax);
         
         // re-sort, re-size, & recolor bars for new attributes
         var bars = d3.selectAll(".bar")
             //re-sort
             .sort(function(a, b){
                 return b[expressedAttr] - a[expressedAttr];
-            })
-            .transition()   // adds animation
-            .delay(function(d, i) {
-                return i * 20;                                
-            })
-            .duration(500);
-                                            
+            });
+        
         updateChart(bars, csvData.length, newColorScale);
 
     };
@@ -378,14 +332,15 @@ to set break points, use debugger; where you want a breakpoint
         /*size/resize bars based on chart heights
         Needed if-else to catch negative values from chart calculation*/
         .attr("height", function(d){
-            var outHeight = (chartHeight-9) -  yScale(d[expressedAttr]);
+            var outHeight = (chartHeight-10) -  yScale(d[expressedAttr]);
+            //console.log("chartHeight: ",chartHeight, "expressedAttr: ", d[expressedAttr]);
             if (outHeight < 0) {
                 return 0;
             } else {
                 return outHeight;
             }})
         .attr("y", function(d) {
-            var outY = yScale(d[expressedAttr]) +5;
+            var outY = yScale(d[expressedAttr]);
             if (outY < 0) {
                 return 0;
             } else {
@@ -395,108 +350,16 @@ to set break points, use debugger; where you want a breakpoint
             return getChoroplethColor(d, colorScale);
         });
         
-//        // scale to size bars proportional to window frame
-//        var yScale = d3.scaleLinear()
-//            .range([chartHeight-7, 0])    // all possible OUTPUT PIXELS
-//            .domain([0, 27]); // all possible INPUT VALUES            
-        
         var chartTitle = d3.select(".chartTitle")
             .text("State " + expressedAttr);        
         
-        // Bob Cowlings' fix to adjust the yAxis
+        // adjusts the yAxis
         var yAxis = d3.axisLeft()
             .scale(yScale);
 
         //update the charts axis    
         var update_yAxis = d3.selectAll("g.axis")
         .call(yAxis);    
-    };
-    
-    // Highlights enumeration units & bars on mouseover
-    function highlight(dataProperties) {
-        // change stroke
-        var selected = d3.selectAll("." + dataProperties.abbrev)
-            .style("stroke", "lime")    // removed color "blue" 
-            .style("stroke-width", "4");
-        
-        // add dynamic label on mouseover
-        setLabel(dataProperties);            
-    };
-    
-    // Dehighlights enumeration units & bars on mouseout. Select path's style & replaces existing style with highlighted style that was appended to path element with highlight() function
-    function dehighlight(dataProperties) {
-        var selected = d3.selectAll("." + dataProperties.abbrev)  
-            .style("stroke", function() {
-                return getStyle(this, "stroke");                
-            })
-            .style("stroke-width", function() {
-                return getStyle(this, "stroke-width")
-            });
-        
-        function getStyle(element, styleName) {
-            var styleText = d3.select(element)  
-                .select("desc")
-                .text();
-            
-            var styleObject = JSON.parse(styleText);            
-            return styleObject[styleName];
-            
-        };        
-        // remove dynamic label created through function setLabel() on mouseout
-        d3.select(".infolabel")
-            .remove();        
-    };
-    
-    // Creates dynamic labels that move with the curor
-    function setLabel(dataProperties) {
-        // only puts 2 decimal places after value for attributes other than number of utilities/state
-        if (expressedAttr != "NumElectricCo") {
-            var val = 
-                parseFloat(Math.round(dataProperties[expressedAttr] * 100) / 100).toFixed(2);
-        } else {
-            val = dataProperties[expressedAttr] 
-        }
-            
-        // label content for specific attribute, accessed through a dictionary
-        var labelAttribute = "<h1>" + val +
-            "</h1><b>" + expressedAttr + "</b>";
-        
-        // info label div added to DOM
-        var infolabel = d3.select("body")
-            .append("div")
-            .attr("class", "infolabel")
-            .attr("id", dataProperties.abbrev + "_label")
-            .html(labelAttribute);
-        
-        // append label to infolabel
-        var stateName = infolabel.append("div")
-            .attr("class", "stateName")
-            .html(dataProperties.name);
-    };
-    
-    // Moves infolabel with mouse move
-    function moveLabel() {
-        // get width of label
-        var labelWidth = d3.select(".infolabel")
-            .node()     // returns DOM node
-            .getBoundingClientRect()
-            .width;
-        
-        // get mouse coordinates to set label to those
-        var x1 = d3.event.clientX + 10,
-            y2 = d3.event.clientY - 75,
-            x2 = d3.event.clientX - labelWidth - 10,
-            y1 = d3.event.clientY - 25;
-        
-        // horizontal label coordinate, testing for label overflow
-        var x = d3.event.clientX > window.innerWidth - labelWidth - 20 ? x2 : x1;
-        
-        // vertical label coordinate, testing for label overflow
-        var y = d3.event.clientY < 75 ? y2 : y1;
-        
-        d3.select(".infolabel")
-            .style("left", x + "px")
-            .style("top", y + "px");
         
         
     };

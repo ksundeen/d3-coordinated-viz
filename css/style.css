@@ -17,8 +17,8 @@ html * {
 }
 
 .gratBackground {
-/*    fill: #d5e3ff;*/
-    fill: #F0F8FF;
+    fill: #d5e3ff;
+/*    fill: #F0F8FF;*/
 }
 
 .map {
@@ -27,13 +27,13 @@ html * {
 }
 
 .chartBackground {
-    background-color: rgba(128,128,128,0.2);
+    background-color: rgba(128,128,128,0.5);
 }
 .chart {
 
 /*    border: medium solid #999;*/
     float: right;
-    margin: 7px 20px 0 0;
+    margin: 10px 20px 0 0;
 }
 
 .chartFrame {
@@ -65,4 +65,39 @@ html * {
 .axis text {
     font-size: 0.8em;
     fill: #999;
+}
+
+.dropdown {
+    position: absolute;  /* so position doesn't change relative to other elements*/
+    top: 30px;
+    left: 40px;
+    z-index: 10;  /*  */
+    font-size: 1em;
+    font-weight: bold;
+    padding: 2px;
+    border: 1px solid #999;
+    box-shadow: 2px 2px 4px #999;
+}
+
+option {
+    font-weight: normal;
+}
+
+.infolabel {
+    position: absolute;
+    height: 50px;
+    min-width: 100px;
+    color: #fff;
+    background-color: #000;
+    border: solid thin #fff;
+    padding: 5px 10px;
+    box-shadow: 2px 2px 4px #999;
+    top: -75px;
+}
+
+.infolabel h1 {
+    margin: 0 20px 0 0;
+    padding: 0;
+    display: inline-block;
+    line-height: 1em;
 }
