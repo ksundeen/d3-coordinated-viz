@@ -16,13 +16,16 @@
 	<body>
 		<!--put your initial page content-->
         <div id="myheader row">
-            <div class="col-sm-12">
+            <div class="col-sm-8">
             <h2>2015 US Electricity Profiles</h2>
                 <div>The US Energy of Information Administration publishes yearly electricity profile for US states. Information visualized here builds on the <span><a href="https://www.eia.gov/electricity/state/" target = "_blank">State Electricity Profiles</a></span>
                 website to enhance understanding through visualizing each state's electrity prices (cents/kWh), summer capacity (MW of power), generation (MWh), retail sales (in MWh), and finally, number of electric utilities serving each state.  
                 </div> 
             </div>
-        </div>
+        </div><br><p></p>
+        <p id="zoomlabel" class="col-sm-12">Zoom or Pan in the map.
+        </p>
+
         <div class="row">
             <div class="col-sm-6" id="mydiv"></div>
         </div>
@@ -40,7 +43,7 @@
         <script type="text/javascript" src="lib/d3-queue.v2.min.js"></script>
         <script type="text/javascript" src="lib/topojson.v2.min.js"></script>
         <script type="text/javascript" src="lib/simple-statistics.js"></script>
-		<script type="text/javascript" src="js/main.js?ver=1.19"></script>
+		<script type="text/javascript" src="js/main.js?ver=1.4"></script>
 <!--        <script type="text/javascript" src="js/rwardley_main.js"></script>-->
 	</body>
 </html>
