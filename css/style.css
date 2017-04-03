@@ -1,7 +1,11 @@
 /* Stylesheet by Kim Sundeen, 2017 */
 
 html * {
-    font-family: Geneva, Tahoma, Verdana, sans-serif;
+    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+}
+
+body {
+    background-color: LightGray ;
 }
 
 .states {
@@ -27,7 +31,7 @@ html * {
 }
 
 .chartBackground {
-    background-color: rgba(128,128,128,0.5);
+    background-color: rgba(128,128,128,1);
 }
 .chart {
 
@@ -69,7 +73,7 @@ html * {
 
 .dropdown {
     position: absolute;  /* so position doesn't change relative to other elements*/
-    top: 30px;
+    top: 130px;
     left: 40px;
     z-index: 10;  /*  */
     font-size: 1em;

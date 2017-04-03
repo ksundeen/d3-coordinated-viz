@@ -8,9 +8,18 @@ to set break points, use debugger; where you want a breakpoint
  
     // Pseudo-global variables (global within this file, but local for all other js libraries referenced)
     var attrArray = ["AveRetailPrice_CentsPerKWH", "SqmiPerUtility_PerSqMi", 
-                     "NetSummerCapacity_MW_per100SqMi", "NetGeneration_MW_per_SqMi", "TotalRetailSales_inMWH_perSqMi", "NumElectricCo"];
+                     "NetSummerCapacity_MW_perSqMi", "NetGeneration_MW_per_SqMi", "TotalRetailSales_inMWH_perSqMi", "NumElectricCo"];
     
-    var companyNames =  "ElectricCompanyNames"
+    var attArrayTranslate = {
+        AveRetailPrice_CentsPerKWH: "Ave Retail Price ($Cents/kWh)", 
+        SqmiPerUtility_PerSqMi: "Area Per # Utilities (Sq Mi/Utility)",
+        NetSummerCapacity_MW_perSqMi: "Net Summer Capacity (MW/Sq Mi)", 
+        NetGeneration_MW_per_SqMi: "Net Generation (MW/Sq Mi)", 
+        TotalRetailSales_inMWH_perSqMi: "Total Retail Sales of Power (MWH/Sq Mi)", 
+        NumElectricCo: "# Electric Utilities per State"
+    };
+    
+    var companyNames =  "ElectricCompanyNames";
     
     
     var pageHeight = 460;
@@ -41,12 +50,29 @@ to set break points, use debugger; where you want a breakpoint
         var width = window.innerWidth * 0.5,
             height = pageHeight-10;
 
+        // define zoom behavior
+        var zoom = d3.zoom()
+            .scaleExtent([0.2, 10])
+            .on("zoom", zoomFunction);
+        
+        // Zoom Funtion Event Listener
+        function zoomFunction(){
+            var transformZoom = d3.zoomTransform(this);
+            var zoomMap = d3.select("#mapg")
+                    .attr("transform", "translate(" + transformZoom.x + "," + transformZoom.y + ") scale(" + transformZoom.k + ")");
+            
+        };
+        
         // Create svg graphic as map container; setting width & height within svg graphic as attributes
         var map = d3.select("body")
             .append("svg")
             .attr("class", "map")
             .attr("width", width)
-            .attr("height", height);
+            .attr("height", height)
+            .attr("id", "mapsvg")
+            .append("g")
+            .attr("id", "mapg")
+            .call(zoom);    
 
         // Create Albers USA equal area conic projection centered on US
         var projection = d3.geoAlbersUsa()     // could use geoAlbersUsa()
@@ -276,7 +302,7 @@ to set break points, use debugger; where you want a breakpoint
             .attr("x", 40)  // append 40 pixels to the right
             .attr("y", 40)  // append 40 pixels down
             .attr("class", "chartTitle")
-            .text("State " + expressedAttr);
+            .text("State " + attArrayTranslate[expressedAttr]);
         
         // Vertical axis generator
         var yAxis = d3.axisLeft()
@@ -322,7 +348,11 @@ to set break points, use debugger; where you want a breakpoint
             .enter()
             .append("option")
             .attr("value", function(d) { return d; })
-            .text(function(d){ return d; });
+            .text(function(d){ 
+                // add in conditional for renaming attributes
+                return attArrayTranslate[d]; 
+            });
+        
     };
     
     // Takes data & changes attribute based on user interaction within dropdown
@@ -401,7 +431,7 @@ to set break points, use debugger; where you want a breakpoint
 //            .domain([0, 27]); // all possible INPUT VALUES            
         
         var chartTitle = d3.select(".chartTitle")
-            .text("State " + expressedAttr);        
+            .text(attArrayTranslate[expressedAttr]);        
         
         // Bob Cowlings' fix to adjust the yAxis
         var yAxis = d3.axisLeft()
@@ -454,7 +484,7 @@ to set break points, use debugger; where you want a breakpoint
             var val = 
                 parseFloat(Math.round(dataProperties[expressedAttr] * 100) / 100).toFixed(2);
         } else {
-            val = dataProperties[expressedAttr] 
+            val = dataProperties[expressedAttr]; /* + " - Utilities: " + dataProperties["ElectricCompanyNames"];*/
         }
             
         // label content for specific attribute, accessed through a dictionary

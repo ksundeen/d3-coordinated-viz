@@ -1,4 +1,4 @@
-fipscode,State,abbrev,AveRetailPrice_CentsPerKWH,NumElectricCo,ElectricCompanyNames,SqmiPerUtility_PerSqMi,NetSummerCapacity_MW_per100SqMi,NetGeneration_MW_per_SqMi,TotalRetailSales_inMWH_perSqMi
+fipscode,State,abbrev,AveRetailPrice_CentsPerKWH,NumElectricCo,ElectricCompanyNames,SqmiPerUtility_PerSqMi,NetSummerCapacity_MW_perSqMi,NetGeneration_MW_per_SqMi,TotalRetailSales_inMWH_perSqMi
 1,Alabama,AL,9.33,3,"Alabama Power, PowerSouth Energy Cooperative, Inc., Wiregrass Electric Cooperative",17473.33333,0.580064861,2908.764346,1694.878729
 2,Alaska,AK,17.59,5,"Golden Valley Electric Association, Chugach Electric Association, Copper Valley Electric Association, Municipal Light & Power, Kodlak Electric Association",133076.8,0.003890986,9.445578794,9.256615729
 4,Arizona,AZ,10.34,3,"Arizona Public Service (APS), Salt River Project, 
