@@ -432,12 +432,19 @@ to set break points, use debugger; where you want a breakpoint
 //            .domain([0, 27]); // all possible INPUT VALUES            
         
         var chartTitle = d3.select(".chartTitle")
-            .text(attArrayTranslate[expressedAttr]);        
+            .text(attArrayTranslate[expressedAttr]);         
         
         // Bob Cowlings' fix to adjust the yAxis
         var yAxis = d3.axisLeft()
-            .scale(yScale);
-
+            .scale(yScale)
+            //Format the charts axis labels
+            .tickFormat(function (d) {
+                if ((d / 1000) >= 1) {
+                    d = d / 1000 + "K";
+                }
+                return d;
+            }); 
+        
         //update the charts axis    
         var update_yAxis = d3.selectAll("g.axis")
         .call(yAxis);    
