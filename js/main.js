@@ -497,7 +497,7 @@ to set break points, use debugger; where you want a breakpoint
             
         // label content for specific attribute, accessed through a dictionary
         var labelAttribute = "<h1>" + val +
-            "</h1><b>" + expressedAttr + "</b>";
+            "</h1><b>" + attArrayTranslate[expressedAttr] + "</b>";
         
         // info label div added to DOM
         var infolabel = d3.select("body")
