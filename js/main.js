@@ -288,7 +288,7 @@ to set break points, use debugger; where you want a breakpoint
             .attr("class", function(d){
                 return "bar " + d.abbrev;   // used for highlight function
             })
-            .attr("width", chartInnerHeight / csvData.length - 1)
+            .attr("width", chartInnerWidth / csvData.length - 1)
             // only need to use "highlight" function without entire data properties since we already have the "d.abbrev" being returned
             .on("mouseover", highlight)
             .on("mouseout", dehighlight)
